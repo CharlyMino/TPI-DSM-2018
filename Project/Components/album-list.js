@@ -30,23 +30,25 @@ export default class DirectoryList extends React.Component {
   render() {
     if (!this.state.directories) {
       return (
-        <View style= {styles.container}>
+        <View style={styles.container}>
           <Text>Loading, please wait...</Text>
         </View>
       );
     } else {
       return (
-        <ScrollView>
-          <List>
-            {this.state.directories.map((directory, i) => (
-              <ListItem
-                key={i}
-                title={directory.title._content}
-                onPress={() => Alert.alert("Touched")}
-              />
-            ))}
-          </List>
-        </ScrollView>
+          <ScrollView>
+            <List>
+              {this.state.directories.map((directory, i) => (
+                <ListItem
+                  key={i}
+                  title={directory.title._content}
+                  onPress={() => this.props.navigation.navigate("PhotoList", {
+                    directoryId: directory.id
+                  })}
+                />
+              ))}
+            </List>
+          </ScrollView>
       );
     }
   }
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   scrollView: {
-    flex:1,
-    flexDirection: 'column'
+    flex: 1,
+    flexDirection: "column"
   }
 });
