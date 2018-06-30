@@ -39,12 +39,11 @@ export default class Photo extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
+        <ScrollView style={styles.comments}>
           <Image
             style={styles.image}
             source={{ uri: this.props.navigation.getParam("photo") }}
           />
-          <ScrollView style={styles.comments}>
             <List>
               {this.state.comments.map((comment, i) => (
                 <ListItem
@@ -59,7 +58,6 @@ export default class Photo extends React.Component {
               ))}
             </List>
           </ScrollView>
-        </View>
       );
     }
   }
