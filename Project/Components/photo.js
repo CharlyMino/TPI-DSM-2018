@@ -1,5 +1,5 @@
 import React from "React";
-import { Image, View, StyleSheet, ScrollView, Linking } from "react-native";
+import { Image, View, StyleSheet, ScrollView, Linking, Dimensions } from "react-native";
 import { List, ListItem, Button } from "react-native-elements";
 import axios from "axios";
 
@@ -12,6 +12,8 @@ export default class Photo extends React.Component {
     };
     this.getComments();
     this.url = null;
+    this.width = Dimensions.get('window').width-2;
+    this.height = Dimensions.get('window').height * 0.5;
   }
 
   getComments() {
@@ -62,7 +64,7 @@ export default class Photo extends React.Component {
       return (
         <ScrollView style={styles.comments}>
           <Image
-            style={styles.image}
+            style={{width: this.width, height:this.height, alignSelf: 'center'}}
             source={{ uri: this.props.navigation.getParam("photo") }}
           />
           <Button

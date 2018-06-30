@@ -6,7 +6,6 @@ export default class MenuBar extends React.Component {
     return (
         <Header
           backgroundColor = '#5C63D8'
-          leftComponent={{ icon: "home", color: "#fff"}}
           centerComponent={{text:this.props.header, style: { color: "#fff" } }}
         />
     );
