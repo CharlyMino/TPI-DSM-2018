@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, ScrollView, View, Image, Button } from "react-native";
-import { List, ListItem, Card} from "react-native-elements";
+import { List, ListItem } from "react-native-elements";
 import axios from "axios";
 
 export default class PhotoList extends React.Component {
@@ -15,7 +15,7 @@ export default class PhotoList extends React.Component {
   getListPhotos() {
     axios
       .get(
-        "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=4c09c61bc069a47addbbaf2b3003c6b2&photoset_id=72157661365435091&format=json&nojsoncallback=1&auth_token=72157695340278552-66f95f583a2caa5f&api_sig=6d833dd56205cb0f90fa6e86feb56045"
+        "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=6e8a597cb502b7b95dbd46a46e25db8d&photoset_id=72157661365435091&format=json&nojsoncallback=1&auth_token=72157695340278552-66f95f583a2caa5f&api_sig=6d833dd56205cb0f90fa6e86feb56045"
       )
       .then(({ data }) => {
         this.setState({

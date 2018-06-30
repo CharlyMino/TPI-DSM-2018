@@ -1,5 +1,5 @@
 import React from "React";
-import { Image, View, StyleSheet, ScrollView, Text, Linking } from "react-native";
+import { Image, View, StyleSheet, ScrollView, Linking } from "react-native";
 import { List, ListItem, Button } from "react-native-elements";
 import axios from "axios";
 
@@ -17,7 +17,7 @@ export default class Photo extends React.Component {
   getComments() {
     axios
       .get(
-        "https://api.flickr.com/services/rest/?method=flickr.photos.comments.getList&api_key=b1b891993540a0a16824aa1325b151ba&photo_id=" +
+        "https://api.flickr.com/services/rest/?method=flickr.photos.comments.getList&api_key=6e8a597cb502b7b95dbd46a46e25db8d&photo_id=" +
           this.photoId +
           "&format=json&nojsoncallback=1"
       )

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, ScrollView, View, Alert } from "react-native";
+import { StyleSheet, ScrollView, View } from "react-native";
 import { List, ListItem, Button } from "react-native-elements";
 import axios from "axios";
 
@@ -15,7 +15,7 @@ export default class DirectoryList extends React.Component {
   getListado() {
     axios
       .get(
-        "https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=b1b891993540a0a16824aa1325b151ba&user_id=25771860%40N03&format=json&nojsoncallback=1"
+        "https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=6e8a597cb502b7b95dbd46a46e25db8d&user_id=25771860%40N03&format=json&nojsoncallback=1"
       )
       .then(({ data }) => {
         this.setState({

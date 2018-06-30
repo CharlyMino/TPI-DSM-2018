@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
-import { List, ListItem, Button } from "react-native-elements";
+import { StyleSheet, View, ScrollView } from "react-native";
+import { List, Button, Card } from "react-native-elements";
 import axios from "axios";
 
 export default class PhotoAlbumList extends React.Component {
@@ -17,7 +17,7 @@ export default class PhotoAlbumList extends React.Component {
   getPhotos() {
     axios
       .get(
-        "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=b1b891993540a0a16824aa1325b151ba&photoset_id=" +
+        "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=6e8a597cb502b7b95dbd46a46e25db8d&photoset_id=" +
           this.props.navigation.getParam("directoryId") +
           "&format=json&nojsoncallback=1"
       )
@@ -61,25 +61,45 @@ export default class PhotoAlbumList extends React.Component {
         <ScrollView>
           <List>
             {this.state.photos.map((photo, i) => (
-              <ListItem
+              <Card
                 key={i}
                 title={photo.title}
-                subtitle={
-                  <View style={styles.subtitleView}>
-                    <Image
-                      style={styles.ratingImage}
-                      source={{
-                        uri: this.getPhotoURL(photo.farm, photo.server, photo.id, photo.secret)
-                      }}
-                    />
-                  </View>
-                }
-                onPress = {() => this.props.navigation.navigate('PhotoSelected', 
-                {
-                    photo: this.getPhotoURL(photo.farm, photo.server, photo.id, photo.secret),
-                    photoId: photo.id
-                })}
-              />
+                image={{
+                  uri: this.getPhotoURL(
+                    photo.farm,
+                    photo.server,
+                    photo.id,
+                    photo.secret
+                  )
+                }}
+                imageProps={{ resizeMode: "cover" }}
+              >
+                <Button
+                  title="View Now"
+                  titleStyle={{ fontWeight: "700" }}
+                  color="rgba(92, 99,216, 1)"
+                  buttonStyle={{
+                    backgroundColor: "#ffff",
+                    width: 150,
+                    alignSelf: "center",
+                    height: 45,
+                    borderColor: "rgba(92, 99,216, 1)",
+                    borderWidth: 1,
+                    borderRadius: 5
+                  }}
+                  onPress={() =>
+                    this.props.navigation.navigate("PhotoSelected", {
+                      photo: this.getPhotoURL(
+                        photo.farm,
+                        photo.server,
+                        photo.id,
+                        photo.secret
+                      ),
+                      photoId: photo.id
+                    })
+                  }
+                />
+              </Card>
             ))}
           </List>
         </ScrollView>
