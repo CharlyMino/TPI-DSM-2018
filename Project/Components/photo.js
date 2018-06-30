@@ -1,6 +1,6 @@
 import React from "React";
-import { Image, View, StyleSheet, ScrollView, Text } from "react-native";
-import { List, ListItem } from "react-native-elements";
+import { Image, View, StyleSheet, ScrollView, Text, Linking } from "react-native";
+import { List, ListItem, Button } from "react-native-elements";
 import axios from "axios";
 
 export default class Photo extends React.Component {
@@ -11,6 +11,7 @@ export default class Photo extends React.Component {
       comments: null
     };
     this.getComments();
+    this.url = null;
   }
 
   getComments() {
@@ -30,11 +31,31 @@ export default class Photo extends React.Component {
       });
   }
 
+
+  generateURL(photoId){
+    return 'https://www.flickr.com/photos/25771860%40N03' + '/' + photoId
+  }
+
+
   render() {
     if (!this.state.comments) {
       return (
-        <View style={styles.container}>
-          <Text>Loading, please wait...}</Text>
+        <View style={styles.loadingContainer}>
+           <Button
+            title="Loading..."
+            loading
+            loadingProps={{ size: "large", color: "rgba(111, 202, 186, 1)" }}
+            titleStyle={{ fontWeight: "700" }}
+            buttonStyle={{
+              backgroundColor: "rgba(92, 99,216, 1)",
+              width: 300,
+              height: 45,
+              borderColor: "transparent",
+              borderWidth: 0,
+              borderRadius: 5
+            }}
+            containerStyle={{ marginTop: 20 }}
+          />
         </View>
       );
     } else {
@@ -43,6 +64,15 @@ export default class Photo extends React.Component {
           <Image
             style={styles.image}
             source={{ uri: this.props.navigation.getParam("photo") }}
+          />
+          <Button
+            title="View on browser"
+            titleStyle={{ fontWeight: "700" }}
+            onPress={() =>{ Linking.openURL(this.generateURL(this.photoId)) } }
+            buttonStyle={styles.ViewOnBrowserButton
+            
+
+            }
           />
             <List>
               {this.state.comments.map((comment, i) => (
@@ -75,4 +105,22 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignSelf: "center"
   },
-});
+    loadingContainer: {
+      flex: 1,
+      backgroundColor: "#ffff",
+      alignItems: "center",
+      justifyContent: "center"
+  },
+    ViewOnBrowserButton: {
+      backgroundColor: "rgba(92, 99,216, 1)",
+      width: 300,
+      height: 45,
+      marginTop: 5,
+      borderColor: "transparent",
+      borderWidth: 0,
+      borderRadius: 5,
+      alignItems: "center",
+      alignSelf: "center",
+    }
+  }
+);

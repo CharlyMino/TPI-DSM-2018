@@ -12,25 +12,25 @@ export const Navigator = createStackNavigator(
     AlbumList: {
       screen: DirectoryList,
       navigationOptions: {
-        header: <MenuBar />
+        header: <MenuBar header="Albums" />
       }
     },
     PhotoList: {
       screen: PhotoAlbumList,
       navigationOptions: {
-        header: <MenuBar />
+        header: <MenuBar header="Album Photos"/>
       }
     },
     PhotoSelected: {
       screen: Photo,
       navigationOptions:{
-          header: <MenuBar />
+          header: <MenuBar header="Photo"/>
       }
     },
     CommentSelected: {
         screen: Comment,
         navigationOptions:{
-            header: <MenuBar />
+            header: <MenuBar header="Comment"/>
         }
     }
   },

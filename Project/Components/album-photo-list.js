@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
-import { Card, Button, List, ListItem } from "react-native-elements";
+import { List, ListItem, Button } from "react-native-elements";
 import axios from "axios";
 
 export default class PhotoAlbumList extends React.Component {
@@ -39,7 +39,21 @@ export default class PhotoAlbumList extends React.Component {
     if (!this.state.photos) {
       return (
         <View style={styles.container}>
-          <Text>Loading, please wait...</Text>
+           <Button
+            title="Loading..."
+            loading
+            loadingProps={{ size: "large", color: "rgba(111, 202, 186, 1)" }}
+            titleStyle={{ fontWeight: "700" }}
+            buttonStyle={{
+              backgroundColor: "rgba(92, 99,216, 1)",
+              width: 300,
+              height: 45,
+              borderColor: "transparent",
+              borderWidth: 0,
+              borderRadius: 5
+            }}
+            containerStyle={{ marginTop: 20 }}
+          />
         </View>
       );
     } else {

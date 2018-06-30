@@ -6,8 +6,8 @@ export default class MenuBar extends React.Component {
     return (
         <Header
           leftComponent={{ icon: "menu", color: "#fff" }}
-          centerComponent={{ text: "ALBUMS", style: { color: "#fff" } }}
-          rightComponent={{ icon: "home", color: "#fff" }}
+          centerComponent={{text:this.props.header, style: { color: "#fff" } }}
+          rightComponent={{ icon: "home", color: "#fff", onPress: () => {this.props.navigation.navigate("AlbumList")} }}
         />
     );
   }
