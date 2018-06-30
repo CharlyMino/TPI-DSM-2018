@@ -15,7 +15,7 @@ export default class DirectoryList extends React.Component {
   getListado() {
     axios
       .get(
-        "https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=82308c909173e0ceb8ddc82fa9f8f1ba&user_id=25771860%40N03&format=json&nojsoncallback=1"
+        "https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=b1b891993540a0a16824aa1325b151ba&user_id=25771860%40N03&format=json&nojsoncallback=1"
       )
       .then(({ data }) => {
         this.setState({
