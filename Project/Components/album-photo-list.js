@@ -4,18 +4,20 @@ import { Card, Button, List, ListItem } from "react-native-elements";
 import axios from "axios";
 
 export default class PhotoAlbumList extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
       photos: null
     };
     this.getPhotos();
+    this.img = null;
   }
 
   getPhotos() {
     axios
       .get(
-        "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=4c09c61bc069a47addbbaf2b3003c6b2&photoset_id=" +
+        "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=b1b891993540a0a16824aa1325b151ba&photoset_id=" +
           this.props.navigation.getParam("directoryId") +
           "&format=json&nojsoncallback=1"
       )
@@ -29,7 +31,9 @@ export default class PhotoAlbumList extends React.Component {
       });
   }
 
-  getPhotoURL() {}
+  getPhotoURL(farm, server, id, secret) {
+      return "https://farm" + farm + ".staticflickr.com/" + server + "/" + id + "_" + secret + ".jpg"
+  }
 
   render() {
     if (!this.state.photos) {
@@ -51,20 +55,16 @@ export default class PhotoAlbumList extends React.Component {
                     <Image
                       style={styles.ratingImage}
                       source={{
-                        uri:
-                          "https://farm" +
-                          photo.farm +
-                          ".staticflickr.com/" +
-                          photo.server +
-                          "/" +
-                          photo.id +
-                          "_" +
-                          photo.secret +
-                          ".jpg"
+                        uri: this.getPhotoURL(photo.farm, photo.server, photo.id, photo.secret)
                       }}
                     />
                   </View>
                 }
+                onPress = {() => this.props.navigation.navigate('PhotoSelected', 
+                {
+                    photo: this.getPhotoURL(photo.farm, photo.server, photo.id, photo.secret),
+                    photoId: photo.id
+                })}
               />
             ))}
           </List>
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   ratingImage: {
     height: 200,
-    width: 370
+    width: 375
   },
   ratingText: {
     paddingLeft: 10,
